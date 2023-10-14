@@ -2,7 +2,6 @@
     --red: #E55604;
     --darkred: #E55604;
     --platinum: #e5e5e5;
-    --darkplatinum: #ababab;
     --black: #2b2d42;
     --white: #fff;
     --thumb: #edf2f4;
@@ -47,7 +46,7 @@
 /* buttons styling */
 .btn{
     background-color: var(--darkred);
-    /* border: 2px solid var(--darkred); */
+    color: var(--white);
     transition: background-color 1s;
 }
 .btn:hover{
@@ -60,12 +59,12 @@
 .recommendation{
     border: 1px solid black;
     padding: 20px;
-    background: var(--platinum);
+    /* background: var(--platinum); */
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
 }
 .recommend:hover{
-    background-color: var(--darkplatinum);
+    background-color: var(--platinum);
 }
 .recommend{
     padding: 5px;
@@ -83,7 +82,7 @@
     flex-direction: row;
     text-align: center;
     justify-content: space-between;
-    width: 45%;
+    /* width: 45%; */
     border-left: 1px solid darkslategray;
 }
 /* flex-column-reverse flex-lg-row justify-content-between */
@@ -94,8 +93,9 @@
         justify-content: center;
         align-self: center;
         text-align: center;
-        width: 45%;
+        /* width: 45%; */
         border-left: 0px;
+        border-bottom: 1px solid darkslategray;
     }
 }
 
@@ -127,6 +127,7 @@ a {
 .cco {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0px 50px;
 }
 

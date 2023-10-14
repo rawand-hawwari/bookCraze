@@ -85,6 +85,62 @@ function addNewArrival(){
         .catch(error => console.error('Error:', error));
 }
 
+// printing recommendation section for user
+// needs user but this is just a preview for it
+function addRecommendation(){
+    fetch('http://localhost:3000/books')
+        .then(response => response.json())
+        .then(json => {
+            books = json.map(function(element){
+                book = new Book(element.id, element.image, element.title, element.author, element.category, element.release_date, element.rating, element.description);
+                return book;
+            });
+
+            books.sort()
+            recommendation = books.sort();
+
+                console.log(recommendation);
+            let list = '';
+            for(i=0; i<7; i++){
+                list += `
+                <li class="recommend" type="button" onclick="clickListBook(${i})">
+                    <h6>Title: ${recommendation[i].title}</h6>
+                    <p>Author: ${recommendation[i].author}</p>
+                </li>`;
+            }
+            document.getElementById('recommendation-list').innerHTML = list;
+
+            let details = document.getElementById('recommend-details');
+            details.innerHTML = `
+                <img src="${recommendation[0].image}" alt="${recommendation[0].title}" height="390.06" width="282.19px">
+                <div class="d-flex justify-content-between mx-5 px-4 my-4">
+                    <div class="text-start me-4">
+                        <p><b>Title: ${recommendation[0].title}</b></p>
+                        <p>Rating: ${books[i].rating} <i class="fas fa-star" style="color: gold;"></i></p>
+                    </div>
+                    <a id="fav" onclick="addToFav(${books[0].id}, ${0}, 'recommendation', event)" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
+                </div>
+            `;
+            // printCards('newBooks', NewArrival);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// function to change the selected book from list of recommendation
+function clickListBook(index){
+    let details = document.getElementById('recommend-details');
+    details.innerHTML = `
+        <img src="${recommendation[index].image}" alt="${recommendation[index].title}" height="390.06" width="282.19px">
+        <div class="d-flex justify-content-between mx-5 px-4 my-4">
+            <div class="text-start me-4">
+                <p><b>Title: ${recommendation[index].title}</b></p>
+                <p>Rating: ${books[i].rating} <i class="fas fa-star" style="color: gold;"></i></p>
+            </div>
+            <a id="fav" onclick="addToFav(${books[index].id}, ${0}, 'recommendation', event)" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
+        </div>
+    `;
+}
+
 // function for book details when (clicked) in home page
 function clickCard(id, section){
     // get tag by the passed id
@@ -128,7 +184,7 @@ function printCards(section, books){
                     <div class = "content-container px-3">
                         <div class="d-flex justify-content-between">
                             <h3 class="card-title">Title: ${books[i].title}</h3>
-                            <a id="fav" onclick="addToFav(${books[i].id}, ${i}, '${section}')" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
+                            <a id="fav" onclick="addToFav(${books[i].id}, ${i}, '${section}', event)" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
                         </div>
                         <div class="card-content">
                             <p>Author: ${books[i].author}</p>
@@ -140,11 +196,16 @@ function printCards(section, books){
                 </div>
                 <div class="d-flex justify-content-between">
                     <p>Rating: ${books[i].rating} <i class="fas fa-star" style="color: gold;"></i></p>
-                    <a href="HTML/book-details.html" class="btn btn-outline-dark read-more">Read more</a>
+                    <a href="HTML/book-details.html" class="btn read-more">Read more</a>
                 </div>
             </div>`;
             i++;
         }else{
+            var idAttribute = item.getAttribute("onclick");
+            console.log(idAttribute);
+            if (idAttribute !== `clickCard(${i},'${section}')`) {
+                item.setAttribute('onclick',`clickCard(${i},'${section}')`);
+            }
             item.removeAttribute('style');
             item.innerHTML = `
                 <div class = "text-center">
@@ -152,7 +213,7 @@ function printCards(section, books){
                     <div class = "content-container px-3">
                         <div class="d-flex justify-content-between">
                             <h3 class="card-title">Title: ${books[i].title}</h3>
-                            <a id="fav" onclick="addToFav(${books[i].id}, ${i}, '${section}')" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
+                            <a id="fav" onclick="addToFav(${books[i].id}, ${i}, '${section}', event)" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
                         </div>
                         <div class="card-content">
                             <p>Author: ${books[i].author}</p>
@@ -165,15 +226,13 @@ function printCards(section, books){
 }
 
 //add to favourite function
-function addToFav(id, index, section){
-    let heartBtn = document.getElementById("fav");
-    heartBtn.click(function(e){
-        e.preventDefault()
-    })
-    let heartIcon = document.getElementsByClassName('fav-icon')
-    // let heartIcon = document.querySelectorAll(`.${section}`);
-    // console.log(`.${section} fav-icon`);
-    // console.log(`fav icons in ${section}:` + heartIcon);
+function addToFav(id, index, section, event){
+    let heartIcon = document.querySelectorAll(`.${section} .fav-icon`)
+
+    if(section ==  'recommendation'){
+        event.stopPropagation();
+    }
+
     console.log(heartIcon);
     console.log(index);
     if(heartIcon[index].classList.contains('far')){
@@ -185,61 +244,8 @@ function addToFav(id, index, section){
     }
 }
 
-// printing recommendation section for user
-// needs user but this is just a preview for it
-function addRecommendation(){
-    fetch('http://localhost:3000/books')
-        .then(response => response.json())
-        .then(json => {
-            books = json.map(function(element){
-                book = new Book(element.id, element.image, element.title, element.author, element.category, element.release_date, element.rating, element.description);
-                return book;
-            });
 
-            books.sort()
-            recommendation = books.sort();
 
-                console.log(recommendation);
-            let list = '';
-            for(i=0; i<7; i++){
-                list += `
-                <li class="recommend" type="button" onclick="clickListBook(${i})">
-                    <h6>Title: ${recommendation[i].title}</h6>
-                    <p>Author: ${recommendation[i].author}</p>
-                </li>`;
-            }
-            document.getElementById('recommendation-list').innerHTML = list;
-
-            let details = document.getElementById('recommend-details');
-            details.innerHTML = `
-                <img src="${recommendation[0].image}" alt="${recommendation[0].title}" height="390.06" width="282.19px">
-                <div class="d-flex justify-content-between mx-5 px-4 my-4">
-                    <div class="text-start me-4">
-                        <p><b>Title: ${recommendation[0].title}</b></p>
-                        <p>Rating: ${books[i].rating} <i class="fas fa-star" style="color: gold;"></i></p>
-                    </div>
-                    <a id="fav" onclick="addToFav(${books[0].id}, ${0})" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
-                </div>
-            `;
-            // printCards('newBooks', NewArrival);
-        })
-        .catch(error => console.error('Error:', error));
-}
-
-// function to change the selected book from list of recommendation
-function clickListBook(index){
-    let details = document.getElementById('recommend-details');
-    details.innerHTML = `
-        <img src="${recommendation[index].image}" alt="${recommendation[index].title}" height="390.06" width="282.19px">
-        <div class="d-flex justify-content-between mx-5 px-4 my-4">
-            <div class="text-start me-4">
-                <p><b>Title: ${recommendation[index].title}</b></p>
-                <p>Rating: ${books[i].rating} <i class="fas fa-star" style="color: gold;"></i></p>
-            </div>
-            <a id="fav" onclick="addToFav(${books[index].id}, ${index})" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
-        </div>
-    `;
-}
 
 let books = [];
 let topRated = [];
