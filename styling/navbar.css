@@ -1,0 +1,52 @@
+nav {
+    background-color: #F1EFEF;
+    color: #fff;
+
+position: relative;
+  }
+  img{
+    max-width: 70px;
+    top: -5px;
+    left: 20px;
+    position: absolute;
+  }
+  .navbar-brand {
+    font-size: 24px;
+  }
+  .navbar-nav li a {
+    color: #E55604;
+    font-size: 16px;
+  }
+  .navbar-nav li a:hover {
+    color: #000000;
+  }
+  .navbar-form {
+    margin-right: 10px;
+  }
+  .form-control {
+    width: 200px;
+    border-radius: 25px;
+    position: relative;
+    
+  }
+  .btn-default {
+    background-color: #f60707;
+    color: #120404;
+    position: absolute;
+   right: 230px;
+   border-radius: 25px;
+
+  }
+  .glyphicon-user {
+    font-size: 16px;
+  }
+  .navbar-nav{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .glyphicon-user{
+   left: 400px;
+   
+  }
+  
