@@ -5,7 +5,7 @@ This repository contains the source code for a website dedicated to books. It is
 
 ## Our Team
 * Rawand Al-Hawwari - Scrum .
-* Muhammed Hassonah - Product Owner and Project Manager.
+* Muhammed Hassonah - Product Owner.
 * Amer Smadi - Quality Assurance.
 * Ehab Abed.
 * Melad Abuliel.
@@ -22,13 +22,13 @@ Live Website[Link](https://https-github-com-group1-library.github.io/e-library/)
 Organization Repository [Link](https://github.com/https-github-com-group1-library/e-library).
 
 ## Team Members Repository Links
-* Rawand [Link](https://github.com/rawand-hawwari/bookCraze)
-* Muhammed [Link]()
-* Amer [Link]()
-* Ehab [Link](https://github.com/Ehabdhafer/book-reading)
-* Melad [Link](https://github.com/MeladAbulail/BookReading)
-* Abdullah [Link]()
-* Sanad [Link]()
+* Rawand Al-Hawwari [Link](https://github.com/rawand-hawwari/bookCraze)
+* Muhammed Hassonah [Link](https://github.com/muhammed-ahmed-hassouna/Book-reading-)
+* Amer Smadi [Link]()
+* Ehab Abed [Link](https://github.com/Ehabdhafer/book-reading)
+* Melad Abuliel [Link](https://github.com/MeladAbulail/BookReading)
+* Abdullah Jareeri [Link](https://github.com/jareeri/e-booklibrary)
+* Sanad Hantash [Link]()
 
 ## Trello Link
 We manage our project tasks and workflow using Trello. You can check our progress and upcoming tasks on our Trello Board.

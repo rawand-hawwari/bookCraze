@@ -1,0 +1,153 @@
+body{
+    background-image:url("/assest/background-auth.png");
+    /* height: 100%; */
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+
+}
+
+.card-signin {
+    display: flex;
+    border: 1px solid black;
+    background-color: #ffffff;
+    width: 80%;
+    width: 1365.49px;
+    height: 626px;
+    /* height: auto; */
+    margin: 56px auto;
+}
+.form-signin{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-top: 40px;
+}
+
+.card-signin h1{
+    color: #E55604;
+    font-size: 60px;
+    margin-bottom: 40px;
+}
+
+.card-signin h2{
+    color: #E55604;
+}
+
+.form-signin input[type="email"],
+.form-signin input[type="password"]
+ {
+    width: 120%;
+    height:50px;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-right: 50px;
+    border: 1px solid #E55604;
+    border-radius: 5px;
+    transition: outline 0.5s ease; 
+    box-sizing: border-box;
+}
+
+.form-signin input[type="password"]:focus,
+.form-signin input[type="email"]:focus {
+    outline: 2px solid #E55604;
+}
+.form-signin input[type="submit"] {
+    width: 100%;;
+    max-width: 250px;
+    background-color: #E55604;
+    color: #ffffff;
+    border: 1px solid #E55604;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 98px;
+    font-size:36px;
+}
+
+.card-signin input[type="submit"]:hover{
+    background-color: #ffffff;
+    color: #E55604;
+    transition: 1s ease; 
+}
+
+.card-signin img{
+    margin-left: 300px;
+}
+
+
+
+.card-signin h3{
+    font-size: 24px;
+    margin-top: 20px;
+    margin-left: 78px;
+
+}
+    .card-signin a{
+    color: #E55604;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+
+@media (max-width:768px){
+    .check::after {
+        display: none;
+    
+    }
+    .card-signin{
+        width: 90%; 
+    }
+    .card-signin  img{
+            display: none;
+        }
+    
+        .form-signin {
+            margin-left: 20px; 
+            margin-top: 20px; 
+        }
+
+        .form-signin input[type="email"],
+        .form-signin input[type="password"]
+        {
+            margin-right: 0; 
+            width: 100%;
+        }  
+        
+
+    
+}
+
+
+/* check error */
+.check {
+    width: 400px;
+    height: 80px;
+    background: #fff;
+    font-weight: 500;
+    margin: 15px 0px 0px 0px;
+    box-shadow: 0 0 20px rgb(0, 0, 0,0.3);
+    display: flex; 
+    align-items: center;
+}
+.check i {
+    margin: 0 20px;
+    font-size: 35px;
+    color: inherit;
+}
+
+.check::after {
+    content: '';
+    position: absolute;
+    top: 190px;
+    width: 400px;
+    height: 5px;
+    background: orange;
+    animation: anim 1.6s linear forwards;
+
+}
+@keyframes anim {
+    100% {
+        width: 0;
+    }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../styling/signup.css">
+    <script src="https://kit.fontawesome.com/b4100c6473.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <div class="card-signup">
+        <div class="form-signup">
+            <div id="check-box"></div>
+            <h1>SignUp</h1>
+            <form>
+                <label for="firstname"><input type="text" name="firstname" id="firstname"
+                        placeholder="First Name"></label>
+                <label for="lastname"><input type="text" name="lastname" id="lastname" placeholder="Last Name"></label>
+                <label for="email"><input type="email" name="email" id="email" placeholder="enter your email"></label>
+                <label for="password"><input type="password" name="password" id="password"
+                        placeholder="enter your password"></label><br><br>
+                <label for="confirm password"><input type="password" name="confirmpassword" id="confirmpassword"
+                        placeholder="confirm your password"></label><br><br>
+                <label for="address"><input type="text" name="address" id="address"
+                        placeholder="enter your address"></label><br><br>
+
+                <input type="submit" value="signup" id="signup">
+            </form>
+            <h3>already have an account?<a a href="signin.html" class="new-signup">sign in</a></h3>
+        </div>
+        
+        <div class="form-image">
+            
+            <img src="../assest/854d08fda8f199afbb68a0ef40b016cc-removebg-preview.png" height="795px">
+        </div>
+    </div>
+    <script src="../js/signup.js" type="module"></script>
+</body>
+
+</html>

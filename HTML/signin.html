@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin User</title>
+    <link rel="stylesheet" href="../styling/signin.css">
+    <script src="https://kit.fontawesome.com/b4100c6473.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-auth-compat.js"></script>
+</head>
+
+<body>
+    <div class="card-signin">
+        <div class="form-signin">
+            <div id="check-box2"></div>
+            <h1>SignIn</h1> 
+            <form>
+                <h2>Email</h2>
+                <label for="email"><input type="email" name="email" id="email" placeholder="enter your email"></label>
+                <h2>Password</h2>
+                <label for="password"><input type="password" name="password" id="password"
+                        placeholder="enter your password"></label><br><br>
+                <input type="submit" value="signin" id="signin">
+            </form>
+            <h3>dont have an account?<a href="signup.html" class="new-signup">sign up</a></h3>
+        </div>
+
+
+        <img src="../assest/854d08fda8f199afbb68a0ef40b016cc-removebg-preview.png" height="795px">
+        
+    </div>
+    
+    <script src="../js/signin.js" type="module"></script>
+</body>
+
+</html>
