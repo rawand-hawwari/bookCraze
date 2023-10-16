@@ -23,10 +23,10 @@
                     <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Catalog</a>
+                    <a class="nav-link" href="/HTML/category.html">Catalog</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/HTML/Authors.html">Authors</a>
+                    <a class="nav-link" href="/HTML/authors.html">Authors</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/HTML/contactus.html/#about-us">About</a>
@@ -40,7 +40,10 @@
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="border: 1px;border-radius: 25px;">
                   <button class="btn btn-outline custom-search-button" type="submit" style="border-radius: 25px; background-color: white; border-color: #E55604 ;color: #E55604;transition: background-color=#E55604 2s">Search</button>
                 </form>
-                <button class="btn btn-outline custom-search-button" onclick="window.location.replace('/HTML/signin.html')" type="submit" style="border-radius: 25px; background-color: white; border-color: #E55604 ;color: #E55604;transition: background-color=#E55604 2s ; margin-left: 3px; margin:10px;" >signin/up</button>
+                <div class="nav navbar-nav navbar-right d-none profile-icon">
+                    <a href="/HTML/userprofile.html"><i class="fas fa-user px-3 h4"></i></a>
+                </div>
+                <button class="btn btn-outline custom-search-button singin-button" onclick="window.location='http:\/\/127.0.0.1:5500/HTML/signin.html'" type="submit" style="border-radius: 25px; background-color: white; border-color: #E55604 ;color: #E55604;transition: background-color=#E55604 2s ; margin-left: 3px; margin:10px;" >signin/up</button>
               </div>
             </div>
         </nav>
@@ -61,7 +64,7 @@
                 </div>
                 <img src="assest/heroBG.png" class="d-none d-lg-block" alt="Hero section background">
             </div>
-            <br><br>
+            <!-- <br><br> -->
 
             <!-- top rated section -->
             <div class="container-sm py-5 my-5">
@@ -72,7 +75,7 @@
                 <div id="top-rated">
                 </div>
             </div>
-            <br><br><br>
+            <!-- <br><br><br> -->
 
             <!-- New Arrival section -->
             <div class="container-sm py-5 my-5">
@@ -83,10 +86,10 @@
                 <div id="new-arrival">
                 </div>
             </div>
-            <br><br><br>
+            <!-- <br><br><br> -->
 
             <!-- Recommendation section -->
-            <div class="container-sm py-5 my-5">
+            <div class="container-sm py-5 my-5 recommend-section">
                 <div class="d-flex justify-content-between">
                     <h3 class="section-header pb-2">Recommendations:</h3>
                     <a href="#" class="text-decoration-none" style="color: #E55604;">See all books &rarr;</a>
@@ -99,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <br><br><br>
+            <br><br>
 
             <!-- quote -->
             <div class="quote d-flex align-items-center">
@@ -113,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            <br><br><br>
+            <!-- <br><br> -->
 
             <!-- Authors:-->
             <div class="container-sm py-5 my-5">
@@ -123,34 +126,33 @@
                 </div>
                 <div class="container-Authors d-grid">
                     <div class="row justify-content-center align-items-start">
-                        <div class="col col-md-3 text-center">
-                            <a href="/HTML/Author.html?">
-                                <img class="Authors-img" src="assest/book1.jpg" alt="">
-                                <h5 class="pt-4">Charles Dickens</h5>
+                        <div class="col col-md-3 text-center" id="authors">
+                            <a href="http://127.0.0.1:5500/HTML/Author.html?author=Helen Hoang">
+                                <img class="Authors-img" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQYbvHm9PvST6i4SkVf8LceHWyY5sRhk8qaTg5lN0MVaVzU1NAZ" alt="Helen Hoang">
+                                <h5 class="pt-4">Helen Hoang</h5>
+                            </a>
+                        </div>
+                        <div class="col col-md-3 text-center" id="authors">
+                            <a href="http://127.0.0.1:5500/HTML/Author.html?author=Khaled Hosseini">
+                                <img class="Authors-img" src="https://images2.minutemediacdn.com/image/upload/c_crop,w_683,h_910,x_0,y_0/c_fill,w_720,ar_3:4,f_auto,q_auto,g_auto/images/GettyImages/mmsport/mentalfloss/01gzbsfrg3neh1e4qta9.jpg" alt="Khaled Hosseini">
+                                <h5 class="pt-4">Khaled Hosseini</h5>
+                            </a>
+                        </div>
+                        <div class="col col-md-3 text-center" id="authors">
+                            <a href="http://127.0.0.1:5500/HTML/Author.html?author=Neil Gaiman">
+                                <img class="Authors-img" src="https://thelongcenter.org/wp-content/uploads/2021/10/NG-Masterclass-Photograph-courtesy-of-MasterClass-scaled.jpg" alt="Neil Gaiman">
+                                <h5 class="pt-4">Neil Gaiman</h5>
                             </a>
                         </div>
                         <div class="col col-md-3 text-center">
-                            <a href="">
-                                <img class="Authors-img" src="assest/book1.jpg" alt="">
-                                <h5 class="pt-4">William Shakespeare</h5>
-                            </a>
-                        </div>
-                        <div class="col col-md-3 text-center">
-                            <a href="">
-                                <img class="Authors-img" src="assest/book1.jpg" alt="">
-                                <h5 class="pt-4">Agatha Christie</h5>
-                            </a>
-                        </div>
-                        <div class="col col-md-3 text-center">
-                            <a href="">
-                                <img class="Authors-img" src="assest/book1.jpg" alt="">
-                                <h5 class="pt-4">Stephen King</h5>
+                            <a href="http://127.0.0.1:5500/HTML/Author.html?author=Yuval Noah Harari">
+                                <img class="Authors-img" src="https://yt3.googleusercontent.com/joj3rjhjH21r352YSneE8IERv6fw8kh07s6xOifJ7M5zW3o46-sNFQDXpwsmV-2MDnFcDqnbzQ=s900-c-k-c0x00ffffff-no-rj" alt="Yuval Noah Harari">
+                                <h5 class="pt-4">Yuval Noah Harari</h5>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <br><br><br>
 
             <!-- What our Reader’s Say about us -->
             <div class="container-sm py-5 my-5 text-center">
@@ -268,8 +270,5 @@
         <script src="js/app.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-        <a href="https://z-pdf.com/electronic-book/1901" class="col-lg-4 col-sm-4 download-link">
-            <i class="far fa-hdd ml-1" aria-hidden="true"></i> Download
-        </a>
     </body>
 </html>

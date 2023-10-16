@@ -95,7 +95,6 @@ function addRecommendation(){
                 book = new Book(element.id, element.image, element.title, element.author, element.category, element.release_date, element.rating, element.description);
                 return book;
             });
-
             books.sort()
             recommendation = books.sort();
 
@@ -111,6 +110,7 @@ function addRecommendation(){
             document.getElementById('recommendation-list').innerHTML = list;
 
             let details = document.getElementById('recommend-details');
+            idRecommend = recommendation[0].id;
             details.innerHTML = `
                 <img src="${recommendation[0].image}" alt="${recommendation[0].title}" height="390.06" width="282.19px">
                 <div class="d-flex justify-content-between m-3 px-2">
@@ -118,7 +118,7 @@ function addRecommendation(){
                         <p><b>Title: ${recommendation[0].title}</b></p>
                         <p>Rating: ${books[i].rating} <i class="fas fa-star" style="color: gold;"></i></p>
                     </div>
-                    <a id="fav" onclick="addToFav(${books[0].id}, ${0}, 'recommendation', event)" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
+                    <a id="fav" onclick="addToFav(${books[0].id}, ${0}, 'recommendation', event)" style="text-decoration: none; color: #E55604;"><i class="fav-icon far fa-heart"></i></a>
                 </div>
             `;
             // printCards('newBooks', NewArrival);
@@ -129,6 +129,7 @@ function addRecommendation(){
 // function to change the selected book from list of recommendation
 function clickListBook(index){
     let details = document.getElementById('recommend-details');
+    idRecommend = recommendation[index].id;
     details.innerHTML = `
         <img src="${recommendation[index].image}" alt="${recommendation[index].title}" height="390.06" width="282.19px">
         <div class="d-flex justify-content-between mx-5 px-4 my-4">
@@ -136,7 +137,7 @@ function clickListBook(index){
                 <p><b>Title: ${recommendation[index].title}</b></p>
                 <p>Rating: ${books[i].rating} <i class="fas fa-star" style="color: gold;"></i></p>
             </div>
-            <a id="fav" onclick="addToFav(${books[index].id}, ${0}, 'recommendation', event)" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
+            <a id="fav" onclick="addToFav(${books[index].id}, ${0}, 'recommendation', event)" style="text-decoration: none; color: #E55604;"><i class="fav-icon far fa-heart"></i></a>
         </div>
     `;
 }
@@ -171,6 +172,7 @@ function printCards(section, bookList){
     let listItems = document.querySelectorAll(`li.${section}`);
     console.log(section);
     let i = 0;
+    let id;
     listItems.forEach(item => {
         var bookid = 0;
         var idAttribute = item.getAttribute("id");
@@ -181,7 +183,6 @@ function printCards(section, bookList){
                     bookid = element.id;
                 }
             });
-
             console.log('hi' + item);
             item.removeAttribute('onclick');
             item.innerHTML = `
@@ -191,7 +192,7 @@ function printCards(section, bookList){
                     <div class = "content-container px-3">
                         <div class="d-flex justify-content-between">
                             <h3 class="card-title">Title: ${bookList[i].title}</h3>
-                            <a id="fav" onclick="addToFav(${bookList[i].id}, ${i}, '${section}', event)" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
+                            <a id="fav" onclick="addToFav(${bookList[i].id}, ${i}, '${section}', event)" style="text-decoration: none; color: #E55604;"><i class="fav-icon far fa-heart"></i></a>
                         </div>
                         <div class="card-content">
                             <p>Author: ${bookList[i].author}</p>
@@ -203,7 +204,7 @@ function printCards(section, bookList){
                 </div>
                 <div class="d-flex justify-content-between">
                     <p>Rating: ${bookList[i].rating} <i class="fas fa-star" style="color: gold;"></i></p>
-                    <a href="HTML/book-details.html?id=${bookid} " class="btn read-more">Read more</a>
+                    <a href="/HTML/book-details.html?id=${bookid}" class="btn read-more">Read more</a>
                 </div>
             </div>`;
             i++;
@@ -220,7 +221,7 @@ function printCards(section, bookList){
                     <div class = "content-container px-3">
                         <div class="d-flex justify-content-between">
                             <h3 class="card-title" style="height: 52px; overflow: hidden;">Title: ${books[i].title}</h3>
-                            <a id="fav" onclick="addToFav(${books[i].id}, ${i}, '${section}', event)" style="text-decoration: none; color: black;"><i class="fav-icon far fa-heart"></i></a>
+                            <a id="fav" onclick="addToFav(${books[i].id}, ${i}, '${section}', event)" style="text-decoration: none; color: #E55604;"><i class="fav-icon far fa-heart"></i></a>
                         </div>
                         <div class="card-content">
                             <p style="height: 48px">Author: ${books[i].author}</p>
@@ -253,7 +254,7 @@ function addToFav(id, index, section, event){
     }
 }
 
-//////////////////////////////////////////////////////////
+// review cards
 document.addEventListener('DOMContentLoaded', function() {
     let flag = 0;
     const c1 = document.querySelector('.c1');
@@ -354,12 +355,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
+document.getElementById('recommend-details').addEventListener('click', function() {
+    window.location = `HTML/book-details.html?id=${idRecommend}`;
+});
 
 let books = [];
 let topRated = [];
 let NewArrival =[];
 let recommendation =[];
+let idRecommend;
 addTopRated();
 addNewArrival();
 addRecommendation();

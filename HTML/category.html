@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+    <link rel="stylesheet" href="/styling/category.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary " style=background-color:#F1EFEF;>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="./imgs/Magicbook_1-removebg-preview.png" alt="" style="width :70px;"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Catalog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/HTML/authors.html">Authors</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+</ul>
+        <button class="btn btn-outline custom-search-button" type="submit" style="border-radius: 25px; border-color: #E55604 ;color: #E55604;transition: background-color=#E55604 2s ; margin-left: 3px; margin:10px;" >signin/up</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+    <nav class="navbarfilter">
+      <div class="filter">
+        <div class="select-group" id="category">
+          <select> 
+            <option value="category">Categories</option>
+            <option value="Historical">Historical</option>
+            <option value="Romance">Romance</option>
+            <option value="Philosophy">Philosophy</option>
+            <option value="Comic">Comic</option>
+            <option value="Literature">Literature</option>
+            <option value="Religion">Religion</option>
+            <option value="Science">Science</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Poetry">Poetry</option>
+          </select>
+        
+        </div>
+        <div class="select-group" id="author">
+          <select> 
+            <option value="author">Authors</option>
+            <option value="Kahlil Gibran">Kahlil Gibran</option>
+            <option value="George R.R. Martin">George R.R. Martin</option>
+            <option value="J.R.R. Tolkien">J.R.R. Tolkien</option>
+            <option value="Dalai Lama and Howard Cutler">Dalai Lama and Howard Cutler</option>
+            <option value="Antoine de Saint-Exupéry">Antoine de Saint-Exupéry</option>
+            <option value="Friedrich Nietzsche">Friedrich Nietzsche</option>
+            <option value="Plato">Plato</option>
+            <option value="Neil Gaiman">Neil Gaiman</option>
+            <option value="Art Spiegelman">Art Spiegelman</option>
+            <option value="Franz Kafka">Franz Kafka</option>
+            <option value="Harper Lee">Harper Lee</option>
+            <option value="Marcel Proust">Marcel Proust</option>
+            <option value="Sun Tzu">Sun Tzu</option>
+            <option value="Dante Alighieri">Dante Alighieri</option>
+            <option value="Haruki Murakami">Haruki Murakami</option>
+            <option value="Thomas S. Kuhn">Thomas S. Kuhn</option>
+            <option value="Brian Greene">Brian Greene</option>
+            <option value="Omar Khayyam">Omar Khayyam</option>
+            <option value="Victor Hugo">Victor Hugo</option>
+            <option value="Colleen Hoover">Colleen Hoover</option>
+            <option value="Diana Wynne Jones">Diana Wynne Jones</option>
+            <option value="Markus Zusak">Markus Zusak</option>
+            <option value="Marjane Satrapi">Marjane Satrapi</option>
+            <option value="Paulo Coelho">Paulo Coelho</option>
+            <option value="Guillaume Musso">Guillaume Musso</option>
+            <option value="Various">Various</option>
+            <option value="Homer">Homer</option>
+            <option value="Yuval Noah Harari">Yuval Noah Harari</option>
+            <option value="Howard Zinn">Howard Zinn</option>
+            <option value="Jared Diamond">Jared Diamond</option>
+            <option value="Jung Chang and Jon Halliday">Jung Chang and Jon Halliday</option>
+            <option value="Khaled Hosseini">Khaled Hosseini</option>
+            <option value="Shelby Foote">Shelby Foote</option>
+            <option value="Erik Larson">Erik Larson</option>
+            <option value="Andrew Marr">Andrew Marr</option>
+            <option value="Helen Hoang">Helen Hoang</option>
+            <option value="Ali Hazelwood">Ali Hazelwood</option>
+            <option value="Emily Henry">Emily Henry</option>
+            <option value="Barbara Tuchman">Barbara Tuchman</option>
+            <option value="Sally Thorne">Sally Thorne</option>
+            <option value="Isabel Wilkerson">Isabel Wilkerson</option>
+            <option value="Viktor Frankl">Viktor Frankl</option>
+            <option value="Stephen Hawking">Stephen Hawking</option>
+            <option value="Jane Austen">Jane Austen</option>
+            <option value="Vyasa">Vyasa</option>
+            <option value="Confucius">Confucius</option>
+          </select>
+        
+        </div>
+        <div class="select-group" id="language">
+          <select>
+            <option value="language">Languages</option>
+            <option value="English">English</option>
+          <option value="Arabic">Arabic</option>
+          <option value="German">German</option>
+          <option value="French">French</option>
+          <option value="Italian">Italian</option>
+          <option value="Portuguese">Portuguese</option>
+          <option value="Persian">Persian</option>
+          <option value="Sanskrit">Sanskrit</option>
+          <option value="Chinese">Chinese</option>
+          <option value="Greek">Greek</option>
+          </select>
+          
+        </div>
+        <div class="select-group" id="sort">
+          <select>
+            <option value="sortby">sortby</option>
+            <option value="A-Z">A-Z</option>
+          <option value="Z-A">Z-A</option>
+          <option value="latest">latest</option>
+          <option value="oldest">oldest</option>
+          <option value="toprated">toprated</option>
+          </select>
+          
+        </div>
+          <div class="search-container-books">
+            <input type="text" placeholder="Search..." id="searchInput">
+            <button type="submit" onclick="searchBooks()">Search</button>
+        </div>
+      </div>
+    </nav>
+      
+      <div id="book"></div>
+     
+  </div>   
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="/js/category.js"></script>
+</body>
+
+<footer class="site-footer1">
+  <div class="footercontain1">
+    <div class="widgets-wrapper1">
+      <div class="widget1">
+        <h5>Pages</h5>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="#">Catalog</a></li>
+          <li><a href="/HTML/authors.html">Author</a></li>
+        </ul>
+      </div>
+
+      <div class="widget1">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="widget1">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="">About Us</a></li>
+        </ul>
+      </div>
+      <div class="widget1">
+        <h5>Our Team</h5>
+        <ul>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/rawand-al-hawwari-b46831227?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              >Rawand Hawwari</a
+            >
+          </li>
+          <li>
+            <a href="www.linkedin.com/in/mohammed-hassouna-03b960290"
+              >Muhammed Hassonah</a
+            >
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/amer-smadi-334992203/"
+              >Amer ALSmadi</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/ehab-abed-b755421aa?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              >Ehab Abed</a
+            >
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/meladabulail"
+              >Melad Abuliel</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/abdullah-jafar-80975924b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              >Abdullah Jareeri</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/sanad-hantash-486080167?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              >Sanad Hantash</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="logo-wrapper1">
+        <p>
+          Copyright<span>&copy;</span> 2023 All rights reserved|This
+          template is made by book reader
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+</html>
