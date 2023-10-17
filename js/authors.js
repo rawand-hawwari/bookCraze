@@ -47,8 +47,8 @@ function getdata() {
                 card.className = "card";
                 card.style = "width: 18rem; height:400px";
                 card.innerHTML = `
-                    <img src="${authors.author_img}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit: cover;" >
-                   
+                <a href="/HTML/Author.html?author=${authors.author}"> <img src="${authors.author_img}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit: cover;" >
+                </a>
                     <div class="card-body">
                         <p class="card-text">Author: ${authors.author}</p>
                     </div>`

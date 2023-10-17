@@ -82,6 +82,8 @@
 //       document.getElementById("booksBy").textContent(`Books By ${element.author}`)
 //     });
 // books class
+let bookrate = 0;
+let toprateindex =0;
 class Book {
     constructor(
       id,
@@ -126,8 +128,14 @@ class Book {
       const bookFromAuthor = document.createElement("li");
       bookFromAuthor.innerHTML = `
       <div>
-          <img src="${element.image}" class="card-img-top" alt="...">
-        <h3 class="card-title">Title : ${element.title}</h3>
+            <a href='/HTML/book-details.html?id=${element.id}'>
+            <img src="${element.image}" class="card-img-top" alt="...">
+            </a>
+        <h3  class="card-title"><a href='/HTML/book-details.html?id=${element.id}'>
+        ${element.title}
+        </a></h3>
+        <span class= "hart-addto" ><a href="#" style="text-decoration: none; color: black;"><i class="far fa-heart"></i></a></span>
+        <h6 class="card-description"> ${element.description}</h6>
         <div class="card-content">
           <p>Author :<a href="http://127.0.0.1:5500/HTML/Author.html?author=${element.author}"> ${element.author}</a></p>
         </div>
@@ -164,8 +172,12 @@ class Book {
           const SuggestionsBokk = document.createElement("li");
           SuggestionsBokk.innerHTML = `
         <div>
+            <a href='/HTML/book-details.html?id=${element.id}'>
             <img src="${element.image}" class="card-img-top" alt="...">
-          <h3 class="card-title">Title : ${element.title}</h3>
+            </a>
+            <h3 class="card-title"><a href='/HTML/book-details.html?id=${element.id}'>       ${element.title}</a>      </h3> 
+            <span class= "hart-addto" ><a href="#" style="text-decoration: none; color: black;"><i class="far fa-heart"></i></a></span>
+            <h6 class="card-description"> ${element.description}</h6>
           <div class="card-content">
           <p>Author :<a href="Author.html?author=${element.author}"> ${element.author}</a></p>
           </div>
@@ -182,29 +194,105 @@ class Book {
 
     //   document.getElementById("topRatedBookImg").textContent = ;
     // finding the highest book rate and add it to the top rate card
-      let bookrate = 0;
+      
     //   console.log(booksJson)
-      for (let index = 0; index < booksJson.length; index++) {
-        if (booksJson[index].rating >=bookrate ) {
-            bookrate = booksJson[index].rating
-            console.log(bookrate);
-            if (index+1 === booksJson.length) {
-                console.log(index);
-                document.getElementById("topRatedBookImg").setAttribute("src", booksJson[index].image);
-                document.getElementById("topratedbook").textContent = booksJson[index].title;
-                document.getElementById("bookrate").textContent = booksJson[index].rating;
-                document.getElementById("about-author").textContent = booksJson[index].about_author;
-                document.getElementById("author-img").setAttribute("src", booksJson[index].author_img);
-                document.getElementById("book-description").textContent = booksJson[index].description;
-            }
-        } 
-
-        
-      }
+      topratedbook(booksJson);
   }
   
+  function topratedbook(booksJson) {
+    for (let index = 0; index < booksJson.length; index++) {
+        if (booksJson[index].rating >bookrate && (index+1==index.length) ) {
+            bookrate = booksJson[index].rating;
+            toprateindex =index;
+            // console.log(bookrate);
+            
+        }else if (index+1 === booksJson.length) {
+                // console.log(index);
+                // console.log(toprateindex);
+                // document.getElementById("topRatedBookImg").setAttribute("src", booksJson[toprateindex].image);
+                // document.getElementById("topratedbook").textContent = booksJson[toprateindex].title;
+                // document.getElementById("bookrate").textContent = booksJson[toprateindex].rating;
+                document.getElementById("about-author").textContent = booksJson[toprateindex].about_author;
+                document.getElementById("author-img").setAttribute("src", booksJson[toprateindex].author_img);
+                // document.getElementById("book-description").textContent = booksJson[toprateindex].description;
+                
+                const item = document.createElement("div");
+                item.innerHTML = `
+                <div>
+                    <div class = "d-flex align-items-center justify-content-center" >
+                        <a href='/HTML/book-details.html?id=${booksJson[toprateindex].id}'>
+                        <img src="${booksJson[toprateindex].image}" class="card-img-top mb-3" alt="Book Cover" style="max-height: 317px; max-width: 208px;">
+                        </a>
+                        <div class = "content-container p-3">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">Title: ${booksJson[toprateindex].title}</h3>
+                                <a href="#" style="text-decoration: none; color: black;"><i class="far fa-heart"></i></a>
+                            </div>
+                            <div class="card-content">
+                                <p>Author: ${booksJson[toprateindex].author}</p>
+                                <p>Category: ${booksJson[toprateindex].category}</p>
+                                <p>Release Date: ${booksJson[toprateindex].release_date}</p>
+                                <p>Description: ${booksJson[toprateindex].description}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Author: ${booksJson[toprateindex].rating} <i class="fas fa-star" style="color: gold;"></i></p>
+                </div>`;
+                document.getElementById("top-seller-book").appendChild(item);
+            }     
+      }
+  }
   document.addEventListener("DOMContentLoaded", () => {
     const author = window.location.search.split("=")[1];
     if (!author) return; // return 404 page
     getAuthorBooks(author);
   });
+  
+
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchForm = document.getElementById("search-form");
+  
+    // Add a submit event listener to the form
+    searchForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent the default form submission
+  
+      // Get the author's name from the search bar input
+      const authorName = document.getElementById("searchbar").value;
+  
+      // Construct the URL to the author's page with the entered author name
+      const authorUrl = `/HTML/Author.html?author=${authorName}`;
+  
+      // Navigate to the specified URL
+      window.location.href = authorUrl;
+    });
+  });
+
+  function caseInsensitiveSearch(needle, haystack) {
+    return haystack.toLowerCase().includes(needle.toLowerCase());
+  }
+
+//   async function getAuthorBooksFromSearch(author) {
+//     const books = await fetch(`http://localhost:3000/books`);
+//     const booksJson_ = await books.json();
+//     console.log(booksJson_);
+//     // Get the author's name from the search bar input
+//     const authorName = document.getElementById("searchbar").value;
+  
+//     // Filter books based on the author name (case-insensitive and partial match)
+//     const filteredBooks = booksJson_.filter((book) =>
+//       caseInsensitiveSearch(authorName, book.author)
+//     );
+  
+//     if (filteredBooks.length > 0) {
+//       // Author found, display books
+//       const authorBooks = filteredBooks.map((book) => book.id);
+//       createBooks(filteredBooks);
+  
+//       // The rest of your code to display top-rated books and suggestions...
+//     } else {
+//       // Author not found, handle it as needed (e.g., show a message)
+//       console.log("Author not found");
+//     }
+//   }

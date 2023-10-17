@@ -14,22 +14,6 @@ class Book{
 }
 
 // ---------------------------------functions
-//function for welcoming msg in (hero section)
-function welcoming(){
-    let header = document.querySelector(".hero .content h1");
-    let sub = document.querySelector(".hero .content h4");
-
-    // if user then =>
-    // change welcome msg for user
-    header.textContent= "Welcome to the Library";  //welcome message
-    sub.textContent= "Dive into endless stories and adventures, all at your fingertips";
-
-    // else then =>
-    header.textContent= "Welcome to the Library";  //welcome message
-    sub.textContent= "Dive into endless stories and adventures, all at your fingertips";
-}
-
-
 
 // add the (top rated) section into home page
 function addTopRated(){
@@ -88,6 +72,7 @@ function addNewArrival(){
 // printing recommendation section for user
 // needs user but this is just a preview for it
 function addRecommendation(){
+    var user = sessionStorage. getItem('userId');
     fetch('http://localhost:3000/books')
         .then(response => response.json())
         .then(json => {
@@ -108,7 +93,6 @@ function addRecommendation(){
                 </li>`;
             }
             document.getElementById('recommendation-list').innerHTML = list;
-
             let details = document.getElementById('recommend-details');
             idRecommend = recommendation[0].id;
             details.innerHTML = `
@@ -217,14 +201,14 @@ function printCards(section, bookList){
             item.removeAttribute('style');
             item.innerHTML = `
                 <div class = "text-center">
-                    <img src="${books[i].image}" class="card-img-top mb-3" alt="${books[i].title}" style="height: 200px">
+                    <img src="${bookList[i].image}" class="card-img-top mb-3" alt="${bookList[i].title}" style="height: 200px">
                     <div class = "content-container px-3">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title" style="height: 52px; overflow: hidden;">Title: ${books[i].title}</h3>
-                            <a id="fav" onclick="addToFav(${books[i].id}, ${i}, '${section}', event)" style="text-decoration: none; color: #E55604;"><i class="fav-icon far fa-heart"></i></a>
+                            <h3 class="card-title" style="height: 52px; overflow: hidden;">Title: ${bookList[i].title}</h3>
+                            <a id="fav" onclick="addToFav(${bookList[i].id}, ${i}, '${section}', event)" style="text-decoration: none; color: #E55604;"><i class="fav-icon far fa-heart"></i></a>
                         </div>
                         <div class="card-content">
-                            <p style="height: 48px">Author: ${books[i].author}</p>
+                            <p style="height: 48px">Author: ${bookList[i].author}</p>
                         </div>
                     </div>
                 </div>`;
@@ -240,18 +224,56 @@ function addToFav(id, index, section, event){
     if(section ==  'recommendation'){
         event.stopPropagation();
     }
-
-    console.log(heartIcon);
-    console.log(index);
-    if(heartIcon[index].classList.contains('far')){
-        heartIcon[index].classList.remove('far');
-        heartIcon[index].classList.add('fas');
-
-    }else if(heartIcon[index].classList.contains('fas')){
-        heartIcon[index].classList.remove('fas');
-        heartIcon[index].classList.add('far');
+    var user = sessionStorage. getItem('userId');
+    if(user == null || user == ""){
+        window.location = "/HTML/signin.html";
+    }else{
+        if(heartIcon[index].classList.contains('far')){
+            heartIcon[index].classList.remove('far');
+            heartIcon[index].classList.add('fas');
     
+            // add to fav
+            fetch("http://localhost:3000/favourite", {
+                method: "POST",
+                body: JSON.stringify({
+                    user: user,
+                    id: id,
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(response => {response.json()} )
+            .then(json => {
+                console.log('POST Success:', json);
+            })
+            .catch(error => console.error('POST Error:', error));
+            event.preventDefault();
+    
+    
+        }else if(heartIcon[index].classList.contains('fas')){
+            heartIcon[index].classList.remove('fas');
+            heartIcon[index].classList.add('far');
+    
+            // delete from fav
+            fetch(`http://localhost:3000/favourite/${id}`, {
+                method: 'DELETE',
+                })
+                .then(response => {
+                    if (response.status === 204) {
+                    console.log('Post deleted successfully');
+                    } else {
+                    console.error('Error deleting post');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+                event.preventDefault();
+        
+        }
     }
+
 }
 
 // review cards
@@ -359,11 +381,53 @@ document.getElementById('recommend-details').addEventListener('click', function(
     window.location = `HTML/book-details.html?id=${idRecommend}`;
 });
 
+
 let books = [];
 let topRated = [];
 let NewArrival =[];
 let recommendation =[];
 let idRecommend;
+let favIcon;
 addTopRated();
 addNewArrival();
 addRecommendation();
+
+
+var user = sessionStorage. getItem('userId');
+// welcoming msg
+let username;
+fetch('http://localhost:3000/data')
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data[0]);
+            username = `${data[0].firstname} ${data[0].lastname}`;
+            // console.log(username);
+            let header = document.querySelector(".hero .content h1");
+            let sub = document.querySelector(".hero .content h4");
+            if(user !=="" && user !== null){
+                // change welcome msg for user
+                header.textContent= `Welcome ${username}`;  //welcome message
+                sub.textContent= "Dive into endless stories and adventures, all at your fingertips";
+            }
+            else{
+                header.textContent= "Welcome to the Library";  //welcome message
+                sub.textContent= "Dive into endless stories and adventures, all at your fingertips";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+// recommendation section
+if(user !=="" && user !== null){
+    // change welcome msg for user
+    if(document.getElementById('recommend-section').classList.contains('d-none')){
+        document.getElementById('recommend-section').classList.remove('d-none');
+    }
+}
+else{
+    if(!document.getElementById('recommend-section').classList.contains('d-none')){
+        document.getElementById('recommend-section').classList.add('d-none');
+    }
+    
+}

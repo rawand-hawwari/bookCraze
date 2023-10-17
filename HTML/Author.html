@@ -3,17 +3,56 @@
 <head>
   <!-- ... your existing meta tags and title ... -->
   <link rel="stylesheet" href="/styling/Author.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <script
       src="https://kit.fontawesome.com/b816840387.js"
       crossorigin="anonymous"
     ></script>
   <header>
-    
+    <nav class="navbar navbar-expand-lg" style="background-color:#F1EFEF; width: 100%;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/index.html"><img src="/assest/logo.png" alt="" style="width :140px; margin-left: 30px;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/category.html">Catalog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/authors.html">Authors</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/contactus.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/contactus.html">Contact</a>
+            </li>
+
+          </ul>
+          <form id="search-form" class="d-flex" role="search">
+            <input id="searchInput" class="form-control me-2" type="search" placeholder="Search for author" aria-label="Search" style="border: 1px;border-radius: 25px;">
+            <button id="searchsubmit" onclick="searchBooks()" class="btn btn-outline custom-search-button" type="submit" style="border-radius: 25px; background-color: white; border-color: #E55604 ;color: #E55604;transition: background-color=#E55604 2s">Search</button>
+          </form>
+          <div class="nav navbar-nav navbar-right d-none" id="profile-icon">
+            <a href="/HTML/userprofile.html" class="text-dark"><i class="fas fa-user px-3 h4"></i></a>
+          </div>
+          <button class="btn btn-outline custom-search-button" id="singin-button" onclick="window.location='http:\/\/127.0.0.1:5500/HTML/signin.html'" type="submit" style="border-radius: 25px; background-color: white; border-color: #E55604 ;color: #E55604;transition: background-color=#E55604 2s ; margin-left: 3px; margin:10px;" >signin/up</button>
+        </div>
+      </div>
+    </nav>
   </header>
   <main>
-    <div class="hero-section">
+    <div class="hero-section" >
       
       <div class="author-info">
         <img src="" id="author-img" alt="Author Avatar" class="author-avatar">
@@ -25,36 +64,38 @@
       </div>
       <div></div>
     </div>
-    <br><br><br><br>
     <br><br>
-    <div class="top-seller-book" style="display: flex;">
-        <div class="top-seller-img">
+    <br><br>
+    <div class="container-sm">
+    <div class="top-seller-book" id="top-seller-book" style="display: flex;">
+        <!-- <div class="top-seller-img">
       <img src="https://m.media-amazon.com/images/I/81vH6kaT1jL._SY466_.jpg" alt="Book cover" id="topRatedBookImg">
       </div>
       <div class="book-info">
       <div class="best-seller">Top rated</div>
       <h3 id="topratedbook"></h3>
         <p id="book-description"></p>
-      <span id="bookrate" style=" font-size: 1.3rem;"> </span><i class="fa-solid fa-star fa-xl" style="color: #fff700;"></i>
-    </div>
+      <span id="bookrate" style=" font-size: 1.3rem;"> </span><i class="fa-solid fa-star fa-xl" style="color: #fff700;"></i> -->
+    <!-- </div> -->
     </div>
     <br><br><br><br><br><br>
-      <p id="booksBy" style="font-size: x-large;">BOOKS BY </p>
-      <br>
     <!-- ... other sections ... -->
     <div class="container">
+      <p id="booksBy" style="font-size: xx-large;">BOOKS BY </p>
       <ul class="cards" id="card-author-books">
         <!-- the book card will be added here -->
       </ul>
     </div>
-    <br><br><br><br><br><br>
-    <p style="font-size: x-large;">Suggestions Books :</p>
+    <br><br><br><br>
+    
     <br><br>
     <div class="container">
+      <p style="font-size: xx-large;">Suggestions Books :</p>
       <ul class="cards" id="SuggestionsBooks">
       <!-- the Suggestions Books will be added here -->
       </ul>
     </div>
+  </div>
 
   </main>
   <br><br>
@@ -64,23 +105,23 @@
             <div class="widget1">
                 <h5>Pages</h5>
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Catalog</a></li>
-                    <li><a href="">Author</a></li>
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/HTML/category.html">Catalog</a></li>
+                    <li><a href="/HTML/authors.html">Author</a></li>
                 </ul>
             </div>
 
             <div class="widget1">
                 <h5>Contact</h5>
                 <ul>
-                    <li><a href="">Contact Us</a></li>
+                    <li><a href="/HTML/contactus.html">Contact Us</a></li>
                 </ul>
             </div>
 
             <div class="widget1">
                 <h5>Company</h5>
                 <ul>
-                    <li><a href="">About Us</a></li>
+                    <li><a href="/HTML/contactus.html">About Us</a></li>
                 </ul>
             </div>
             <div class="widget1">
@@ -127,6 +168,7 @@
     </div>
 </footer>
 <script src="/js/Author.js"></script>
+<script src="/js/userlogged.js"></script>
 <!-- Code injected by live-server -->
 <script>
 	// <![CDATA[  <-- For SVG support

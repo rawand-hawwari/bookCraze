@@ -11,20 +11,23 @@ const firebaseConfig = {
     appId: "1:606843380299:web:61a3bd9d75b1cc64eee3ce",
     measurementId: "G-259LECQSMQ"
 };
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
 let box = document.getElementById("check-box2");
 
-document.getElementById('signin').addEventListener('click', async function (event) {
+let UiD2 = 0;
+
+document.getElementById('signin').addEventListener('click', async function (event, uid) {
     event.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
     function showInvalidMsg(message) {
         let check = document.createElement("div");
-        check.classList.add("check")
+        check.classList.add("check");
         box.appendChild(check);
         check.innerHTML = `<i class="fa-solid fa-circle-exclamation" style="color: #f2c218;"></i> ${message}`;
         setTimeout(() => {
@@ -34,13 +37,13 @@ document.getElementById('signin').addEventListener('click', async function (even
 
     function Successfulmsg(message) {
         let check = document.createElement("div");
-        check.classList.add("check")
+        check.classList.add("check");
         box.appendChild(check);
         check.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #18af45;"></i> ${message}`;
         setTimeout(() => {
             console.log("Removing check element");
             check.remove();
-        }, 1600)
+        }, 1600);
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -59,24 +62,27 @@ document.getElementById('signin').addEventListener('click', async function (even
         return;
     }
 
-
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            const user = userCredential.user;
-            // Fetch user data from Firestore
-            return getDoc(doc(db, 'users', email)); // name of collection 'users'
+            const user = userCredential.user.uid;
+            // Fetch user data from Firestore using the user's UID
+            sessionStorage.setItem('userId', user);
+            return getDoc(doc(db, 'users', email));
         })
         .then((docSnap) => {
+            
             if (docSnap.exists()) {
                 const userData = docSnap.data();
+
                 const userJSON = JSON.stringify({
                     firstname: userData.firstname,
                     lastname: userData.lastname,
-                    address: userData.address, 
+                    address: userData.address,
+                    email: userData.email
                 });
+
                 Successfulmsg(`${userData.firstname} ${userData.lastname} login successfully`);
                 setTimeout(() => {
-                    window.location.href = "../index.html"; //here to go to homepage
                     fetch("http://localhost:3000/data", {
                         method: "POST",
                         headers: {
@@ -84,17 +90,30 @@ document.getElementById('signin').addEventListener('click', async function (even
                         },
                         body: userJSON,
                     })
+                }, 1000);
+
+
+                setTimeout(() => {
+                    fetch("http://localhost:3000/data")
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error(`HTTP error! Status: ${response.status}`);
                             }
                             return response.json();
                         })
-                        .catch(error => console.error("Error sign up:", error));
-                }, 1600);
+                        .then(responseJson => {
+                        })
+
+
+                        .catch(error => console.error("Error retrieving data:", error));
+                }, 1000);
             } else {
                 showInvalidMsg("User data not found.");
             }
+            setTimeout(() => {
+                window.location.href = "../index.html"; // Navigate to the homepage here
+            }, 1100);
+
         })
         .catch((error) => {
             const errorCode = error.code;

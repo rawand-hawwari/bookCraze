@@ -1,27 +1,3 @@
 {
-  "data": [
-    {
-      "id": 1,
-      "firstname": "json-server",
-      "author": "typicode"
-    },
-    {
-      "firstname": "ehab",
-      "lastname": "mohammed",
-      "email": "eaxqqqsxsax@gmail.com",
-      "address": "ASAXas1232454335@#@#",
-      "id": 2
-    },
-    {
-      "email": "qqqqqqqq@gmail.com",
-      "password": "ASAXas1232454335@#@#",
-      "id": 3
-    },
-    {
-      "firstname": "sdfsdv",
-      "lastname": "dsvsdvs",
-      "address": "ASAXas1232454335@#@#",
-      "id": 4
-    }
-  ]
+  
 }

@@ -1,4 +1,3 @@
-
 const firebaseConfig = {
   apiKey: "AIzaSyCQM2ALk3jc04MEhCxETa6wRIzhem_Tit8",
   authDomain: "e-library-4a89d.firebaseapp.com",
@@ -6,21 +5,21 @@ const firebaseConfig = {
   storageBucket: "e-library-4a89d.appspot.com",
   messagingSenderId: "606843380299",
   appId: "1:606843380299:web:61a3bd9d75b1cc64eee3ce",
-  measurementId: "G-259LECQSMQ"
+  measurementId: "G-259LECQSMQ",
 };
 
 const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-document.getElementById('signup').addEventListener('click', function (event) {
+document.getElementById("signup").addEventListener("click", function (event) {
   event.preventDefault();
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const confirmpassword = document.getElementById('confirmpassword').value;
-  const firstname = document.getElementById('firstname').value;
-  const lastname = document.getElementById('lastname').value;
-  const address = document.getElementById('address').value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const confirmpassword = document.getElementById("confirmpassword").value;
+  const firstname = document.getElementById("firstname").value;
+  const lastname = document.getElementById("lastname").value;
+  const address = document.getElementById("address").value;
 
   let Successfulmsg0 = `<i class="fa-solid fa-circle-check" style="color: #18af45;"></i>  Successful Sign up`;
 
@@ -28,18 +27,18 @@ document.getElementById('signup').addEventListener('click', function (event) {
 
   function Successfulmsg() {
     let check = document.createElement("div");
-    check.classList.add("check")
+    check.classList.add("check");
     box.appendChild(check);
     check.innerHTML = Successfulmsg0;
     setTimeout(() => {
       console.log("Removing check element");
       check.remove();
-    }, 1600)
+    }, 1600);
   }
 
   function showInvalidMsg(message) {
     let check = document.createElement("div");
-    check.classList.add("check")
+    check.classList.add("check");
     box.appendChild(check);
     check.innerHTML = `<i class="fa-solid fa-circle-exclamation" style="color: #f2c218;"></i> ${message}`;
     setTimeout(() => {
@@ -52,15 +51,14 @@ document.getElementById('signup').addEventListener('click', function (event) {
     return;
   } //The trim() method removes leading and trailing whitespace characters from a string.
 
-  if (firstname.includes(' ')) {
-    showInvalidMsg("Username cannot contain spaces.")
+  if (firstname.includes(" ")) {
+    showInvalidMsg("Username cannot contain spaces.");
     return;
   }
-  if (lastname.includes(' ')) {
-    showInvalidMsg("Username cannot contain spaces.")
+  if (lastname.includes(" ")) {
+    showInvalidMsg("Username cannot contain spaces.");
     return;
   }
-
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
@@ -74,7 +72,9 @@ document.getElementById('signup').addEventListener('click', function (event) {
     !/[A-Z]/.test(password) ||
     !/[!@#$%^&*]/.test(password)
   ) {
-    showInvalidMsg("Password must be at least 8 characters and contain 1 number, 1 uppercase letter, and special characters.");
+    showInvalidMsg(
+      "Password must be at least 8 characters and contain 1 number, 1 uppercase letter, and special characters."
+    );
     return;
   }
   if (
@@ -83,64 +83,52 @@ document.getElementById('signup').addEventListener('click', function (event) {
     !/[A-Z]/.test(confirmpassword) ||
     !/[!@#$%^&*]/.test(confirmpassword)
   ) {
-    showInvalidMsg("Password must be at least 8 characters and contain 1 number, 1 uppercase letter, and special characters.");
+    showInvalidMsg(
+      "Password must be at least 8 characters and contain 1 number, 1 uppercase letter, and special characters."
+    );
   }
   if (password !== confirmpassword) {
-    showInvalidMsg("passwords not matches")
+    showInvalidMsg("passwords not matches");
     return;
   }
-
 
   const userData = {
     firstname: firstname,
     lastname: lastname,
     email: email,
-    address: address
+    address: address,
+    id: firebase.firestore.FieldValue.serverTimestamp(),
   };
 
-
-  auth.createUserWithEmailAndPassword(email, password)
+  auth
+    .createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
       // Save user data to Firestore
-      return db.collection('users').doc(email).set({
+      return db.collection("users").doc(email).set({
         firstname: firstname,
         lastname: lastname,
         email: email,
-        address: address
+        address: address,
+        userUID:userCredential.user.uid
       });
     })
     .then(() => {
-      console.log('User data saved to Firestore successfully.');
+      console.log("User data saved to Firestore successfully.");
 
       Successfulmsg();
       setTimeout(() => {
         window.location.href = "../HTML/signin.html";
-        fetch("http://localhost:3000/data", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-          })
-          .catch(error => console.error("Error sign up:", error));
       }, 3000);
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      if (errorCode === 'auth/email-already-in-use') {
+      if (errorCode === "auth/email-already-in-use") {
         showInvalidMsg("Email already used!");
       } else {
         console.error("Error creating user:", error);
       }
     });
 });
-

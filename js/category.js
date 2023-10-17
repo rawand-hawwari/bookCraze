@@ -12,8 +12,14 @@ class Book {
     }
 }
 
+
+
+
+
 function getdata() {
+    
     fetch('http://localhost:3000/books')
+    
         .then(response => response.json())
         .then(data => {
             let cards = document.getElementById('book');
@@ -24,7 +30,7 @@ function getdata() {
                 card.className = "card";
                 card.style = "width: 18rem; height:650px";
                 card.innerHTML = `
-                    <img src="${book.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:contain" >
+                    <img src="${book.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:content" >
                     <div class="card-body">
                         <h5 class="card-title" style="overflow:hidden; height:75px">${book.title}</h5>
                         <p class="card-text">Author: ${book.author}</p>
@@ -37,13 +43,53 @@ function getdata() {
                 });
                 cards.appendChild(card);
             });
+
+            
         })
         .catch(error => {
             console.error('Error:', error);
         });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const query = window.location.search.split("=")[1];
+            if (!query) return; // return 404 page
+            searchBook(query);
+          });
 }
 
+async function searchBook(query) {
+    fetch(`http://localhost:3000/books?q=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            let cards = document.getElementById('book');
+            cards.innerHTML = '';
 
+            data.map(element => {
+                const book = new Book(element.id, element.title, element.author, element.category, element.rating, element.description, element.language, element.release_date, element.image);
+
+                let card = document.createElement('div');
+                card.className = "card";
+                card.style = "width: 18rem; height:650px";
+                card.innerHTML = `
+                    <img src="${book.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:content" >
+                    <div class="card-body">
+                        <h5 class="card-title">${book.title}</h5>
+                        <p class="card-text">Author: ${book.author}</p>
+                        <p class="card-text">Category: ${book.category}</p>
+                    </div>
+                `;
+
+                card.querySelector('.card-img-top').addEventListener('click', () => {
+                    window.location.href = `/HTML/book-details.html?id=${element.id}`;
+                });
+                cards.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    
+  }
 
 getdata();
 
@@ -73,7 +119,7 @@ categorySelect.addEventListener("change", (e) => {
                     card.className = "card";
                     card.style = "width: 18rem; height:650px";
                     card.innerHTML = `
-                        <img src="${element.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:contain" >
+                        <img src="${element.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:content" >
                         <div class="card-body">
                             <h5 class="card-title">${element.title}</h5>
                             <p class="card-text">Author: ${element.author}</p>
@@ -123,7 +169,7 @@ authorSelect.addEventListener("change", (e) => {
                     card.className = "card";
                     card.style = "width: 18rem; height:650px";
                     card.innerHTML = `
-                        <img src="${element.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:contain" >
+                        <img src="${element.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:content" >
                         <div class="card-body">
                             <h5 class="card-title">${element.title}</h5>
                             <p class="card-text">Author: ${element.author}</p>
@@ -171,7 +217,7 @@ languageSelect.addEventListener("change", (e) => {
                     card.className = "card";
                     card.style = "width: 18rem; height:650px";
                     card.innerHTML = `
-                        <img src="${element.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:contain" >
+                        <img src="${element.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:content" >
                         <div class="card-body">
                             <h5 class="card-title">${element.title}</h5>
                             <p class="card-text">Author: ${element.author}</p>
@@ -225,7 +271,7 @@ function search(searchQuery) {
                 card.className = "card";
                 card.style = "width: 18rem; height:650px";
                 card.innerHTML = `
-                    <img src="${book.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:contain" >
+                    <img src="${book.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%; object-fit:content" >
                     <div class="card-body">
                         <h5 class="card-title">${book.title}</h5>
                         <p class="card-text">Author: ${book.author}</p>
@@ -234,7 +280,7 @@ function search(searchQuery) {
                 `;
 
                 card.querySelector('.card-img-top').addEventListener('click', () => {
-                    window.location.href = `html/detail.html?id=${book.id}`;
+                    window.location.href = `html/detail.html?id=${element.id}`;
                 });
                 cards.appendChild(card);
             });
@@ -294,7 +340,7 @@ sortSelect.addEventListener("change", (e) => {
                 card.className = "card";
                 card.style = "width: 18rem; height:650px";
                 card.innerHTML = `
-                    <img src="${book.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%;object-fit:contain" >
+                    <img src="${book.image}" class="card-img-top" alt="Book Cover" style="max-width: 100%; height:75%;object-fit:content" >
                     <div class="card-body">
                         <h5 class="card-title">${book.title}</h5>
                         <p class="card-text">Author: ${book.author}</p>
@@ -303,7 +349,7 @@ sortSelect.addEventListener("change", (e) => {
                 `;
 
                 card.querySelector('.card-img-top').addEventListener('click', () => {
-                    window.location.href = `html/detail.html?id=${book.id}`;
+                    window.location.href = `/HTML/book-details.html?id=${book.id}`;
                 });
                 cards.appendChild(card);
             

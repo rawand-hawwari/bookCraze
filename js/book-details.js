@@ -139,7 +139,7 @@ async function bookcatg(id) {
           cards += `
             <li class="card">
               <div>
-              <a href="http://127.0.0.1:5500/HTML/book-details.html?id=${Related[i].id}"><img src="${Related[i].image}" class="card-img-top" alt="..." /></a>
+              <a href="/HTML/book-details.html?id=${Related[i].id}"><img src="${Related[i].image}" class="card-img-top" alt="..." /></a>
                 <h3 class="card-title">Title: ${Related[i].title}</h3>
                 <div class="card-content">
                   <p>Author: ${Related[i].author}</p>
@@ -163,7 +163,9 @@ async function bookauthor(id) {
 
   const bookauthor = books[id - 1].author;
 
-  document.querySelector(".author-name").textContent = bookauthor;
+  document.querySelector(".author-name").innerHTML = `
+  <a href="/HTML/author.html?author=${bookauthor}"><span class="author-name">${bookauthor}</span></a>
+  `;
 }
 // ---------------------------------------------------------------------
 async function bookrating(id) {
@@ -199,7 +201,9 @@ async function bookpdf(id) {
                 href="${bookpdf}"
                 target="_blank"
               >
-                <button class="download">Download now</button>
+                <button class="download" style="
+                width: 125px;
+            ">Read Book</button>
   `;
 }
 // ----------------------------------------------------------------------
@@ -211,14 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let review = document.createElement("span");
   function fun1() {
     review.innerHTML += `<div class="comment-box">
-    <div class="username1">
-      <img
-        src="../assest/profile.png"
-        alt="profile pic"
-        class="details-img3"
-      />
-      <span class="username">User Name :</span>
-    </div>
+    
     <div>
       <span>User Review :</span>
       <span class="details-rating">${rate.value}</span>
@@ -233,4 +230,205 @@ document.addEventListener("DOMContentLoaded", function () {
   btn1.addEventListener("click", fun1);
 });
 
+// async function edit() {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const id = parseInt(urlParams.get("id"));
+
+//   const txt1 = document.getElementById("write-review1").value;
+//   const rate = document.getElementById("select").value;
+
+//   const review = {
+//     bookid: id,
+//     comment: txt1,
+//     rate: rate,
+//   };
+
+//   try {
+//     const response = await fetch("http://localhost:3000/reviews", {
+//       method: "POST",
+//       headers: {
+//         "Content-type": "application/json",
+//       },
+//       body: JSON.stringify(review),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error("Failed to add review.");
+//     }
+
+//     // Call a function to update the DOM with the new review
+//     await bookcomment();
+//   } catch (error) {
+//     console.error("Error:", error.message);
+//   }
+// }
+
+// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
+
+// function edit() {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const id = parseInt(urlParams.get("id"));
+//   // --------------++++++++++*************///////////////
+//   const txt1 = document.getElementById("write-review1").value;
+//   const rate = document.getElementById("select").value;
+//   fetch("http://localhost:3000/reviews", {
+//     method: "POST",
+//     headers: {
+//       "Content-type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       id: "",
+//       bookid: id,
+//       comment: `${txt1}`,
+//       rate: `${rate}`,
+//     }),
+//   });
+// }
+
+// async function bookcomment() {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const id = parseInt(urlParams.get("id"));
+//   const response = await fetch("http://localhost:3000/reviews");
+//   const comment = await response.json();
+
+//   const bookcomment = comment[id - 1].comment;
+//   const bookrate = comment[id - 1].rate;
+
+//   document.querySelector(".detailsrating").textContent = bookrate;
+//   document.querySelector(".details-reviews2").textContent = bookcomment;
+// }
+// bookcomment();
+
+// function editfile() {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const id = parseInt(urlParams.get("id"));
+
+//   const txt1 = document.getElementById("write-review1").value;
+//   const rate = document.getElementById("select").value;
+//   if (txt1 !== null) {
+//     fetch(`http://localhost:3000/reviews/${id}`, {
+//       method: "PUT",
+//       headers: {
+//         "Content-type": "application/json",
+//       },
+//       body: JSON.stringify({ comment: txt1, rate: rate }),
+//     });
+//   }
+// }
+
+// let review = document.createElement("span");
+// function fun1() {
+//   review.innerHTML += `<div class="comment-box">
+//   <div class="username1">
+//     <img
+//       src="../assest/profile.png"
+//       alt="profile pic"
+//       class="details-img3"
+//     />
+//     <span class="username">User Name :</span>
+//   </div>
+//   <div>
+//     <span>User Review :</span>
+//     <span class="details-rating">${rate.value}</span>
+//   </div>
+//   <div>
+//     <span>User Comment :</span>
+//     <span class="details-reviews2">${txt1.value}</span>
+//   </div>
+// </div>`;
+//   document.querySelector(".comments").appendChild(review);
+// }
+// btn1.addEventListener("click", fun1);
+
 // ----------------------------------------------------------------------------
+
+// const urlId = window.location.pathname.split('/')[1];
+
+// fetch('http://localhost:3000/books/' + urlId)
+//   .then(response => response.json())
+//   .then(book => {
+//     const bookId = book.id;
+//     // Do something with the book ID
+//   });
+
+// async function postComment(bookId, comment) {
+//   const txt1 = document.getElementById("write-review1").value;
+//   const rate = document.getElementById("select").value;
+//   const btn1 = document.querySelector(".write-review");
+//   const commentObject = {
+//     id: Math.random(),
+//     bookId: txt1,
+//     comment: rate,
+//   };
+
+//   const stringifiedComment = JSON.stringify(commentObject);
+
+//   const response = await fetch("http://localhost:3000/reviews", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: stringifiedComment,
+//   });
+//   btn1.addEventListener("click", postComment());
+// }
+
+// ----------------------------------------------------------------------------
+function addToFav(event){
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = parseInt(urlParams.get("id"));
+    let heartIcon = document.querySelector(`.fav-icon`)
+
+    var user = sessionStorage. getItem('userId');
+    if(user == null || user == ""){
+        window.location = "/HTML/signin.html";
+    }else{
+        if(heartIcon.classList.contains('far')){
+            heartIcon.classList.remove('far');
+            heartIcon.classList.add('fas');
+    
+            // add to fav
+            fetch("http://localhost:3000/favourite", {
+                method: "POST",
+                body: JSON.stringify({
+                    user: user,
+                    id: id,
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(response => {response.json()} )
+            .then(json => {
+                console.log('POST Success:', json);
+            })
+            .catch(error => console.error('POST Error:', error));
+            event.preventDefault();
+    
+    
+        }else if(heartIcon.classList.contains('fas')){
+            heartIcon.classList.remove('fas');
+            heartIcon.classList.add('far');
+    
+            // delete from fav
+            fetch(`http://localhost:3000/favourite/${id}`, {
+                method: 'DELETE',
+                })
+                .then(response => {
+                    if (response.status === 204) {
+                    console.log('Post deleted successfully');
+                    } else {
+                    console.error('Error deleting post');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });        
+            event.preventDefault();
+
+        }
+    }
+    event.preventDefault();
+
+}

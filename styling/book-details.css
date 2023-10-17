@@ -93,7 +93,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: space-evenly;
 }
 .details-img3 {
   width: 30px;
